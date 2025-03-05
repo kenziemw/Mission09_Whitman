@@ -5,7 +5,9 @@ import './App.css';
 const Heading = () => (
   <header className="bg-blue-600 text-white p-4 text-center">
     <h1 className="text-3xl font-bold">NCAA Basketball Teams</h1>
-    <p className="text-lg">Explore information about all the college basketball teams!</p>
+    <p className="text-lg">
+      Explore information about all the college basketball teams!
+    </p>
   </header>
 );
 
@@ -14,7 +16,9 @@ const TeamCard = ({ team }) => (
   <div className="border p-4 rounded-lg shadow-md bg-white m-2">
     <h2 className="text-xl font-semibold">{team.school}</h2>
     <p className="text-gray-700">Mascot: {team.name}</p>
-    <p className="text-gray-700">Location: {team.city}, {team.state}</p>
+    <p className="text-gray-700">
+      Location: {team.city}, {team.state}
+    </p>
   </div>
 );
 
@@ -24,9 +28,9 @@ const TeamList = () => {
 
   useEffect(() => {
     fetch('/CollegeBasketballTeams.json')
-      .then(response => response.json())
-      .then(data => setTeams(data.teams))
-      .catch(error => console.error('Error fetching team data:', error));
+      .then((response) => response.json())
+      .then((data) => setTeams(data.teams))
+      .catch((error) => console.error('Error fetching team data:', error));
   }, []);
 
   return (
