@@ -1,55 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+// Importing necessary React modules and components
+import React, { useState } from "react";
 
-// #1: Heading Component
-const Heading = () => (
-  <header className="bg-blue-600 text-white p-4 text-center">
-    <h1 className="text-3xl font-bold">NCAA Basketball Teams</h1>
-    <p className="text-lg">
-      Explore information about all the college basketball teams!
-    </p>
-  </header>
-);
+// Importing the JSON data directly from the src folder
+import teamsData from "./CollegeBasketballTeams.json";
 
-// #2: Team Card Component
-const TeamCard = ({ team }) => (
-  <div className="border p-4 rounded-lg shadow-md bg-white m-2">
-    <h2 className="text-xl font-semibold">{team.school}</h2>
-    <p className="text-gray-700">Mascot: {team.name}</p>
-    <p className="text-gray-700">
-      Location: {team.city}, {team.state}
-    </p>
-  </div>
-);
+// Importing custom components
+import TeamList from "./components/TeamList"; // Displays a list of team cards
+import Header from "./components/Header"; // Displays the header section
 
-// #3: Team List Component
-const TeamList = () => {
-  const [teams, setTeams] = useState([]);
+// Main App component
+function App() {
+  // Initializing the 'teams' state with the data from the JSON file
+  const [teams] = useState(teamsData.teams);
 
-  useEffect(() => {
-    fetch('/CollegeBasketballTeams.json')
-      .then((response) => response.json())
-      .then((data) => setTeams(data.teams))
-      .catch((error) => console.error('Error fetching team data:', error));
-  }, []);
-
+  // The returned JSX structure for the app
   return (
-    <div className="flex flex-wrap justify-center">
-      {teams.map((team, index) => (
-        <TeamCard key={index} team={team} />
-      ))}
+    <div>
+      {/* Header component to introduce the site */}
+      <Header />
+      
+      {/* TeamList component that receives the 'teams' array as props */}
+      <TeamList teams={teams} />
     </div>
   );
-};
+}
 
-// Main App Component
-const App = () => {
-  return (
-    <div className="App bg-gray-100 min-h-screen">
-      <Heading />
-      <TeamList />
-    </div>
-  );
-};
-
+// Exporting the App component as the default export
 export default App;
